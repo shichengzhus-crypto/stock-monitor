@@ -5,7 +5,7 @@ import time
 
 sys.stdout.reconfigure(encoding="utf-8")
 from collections import defaultdict
-from datetime import datetime
+from datetime import datetime, timedelta
 
 import config
 from fetcher          import fetch_announcements, try_get_announcement_text
@@ -16,9 +16,13 @@ from notifier_notion  import push_to_notion
 
 
 def run():
-    today_str = datetime.now().strftime("%Y-%m-%d")
+    now        = datetime.now()
+    today_str  = now.strftime("%Y-%m-%d")
+    start_str  = (now - timedelta(days=config.DAYS_BACK)).strftime("%Y-%m-%d")
+    date_range = f"{start_str} 至 {today_str}"
+
     print(f"\n{'='*54}")
-    print(f"  自选股公告监控  {today_str}")
+    print(f"  自选股公告监控  {date_range}")
     print(f"  A股 {len(config.STOCK_CODES)} 只 | 港股 {len(config.HK_STOCK_CODES)} 只 | 美股 {len(config.US_STOCK_CODES)} 只")
     print(f"{'='*54}\n")
 
@@ -87,20 +91,19 @@ def run():
         print()
         time.sleep(0.5)
 
-    _write_report(all_announcements, today_str)
+    _write_report(all_announcements, today_str, date_range)
 
     # 推送到 Notion
     print("\n正在推送到 Notion...")
-    push_to_notion(all_announcements, today_str)
+    push_to_notion(all_announcements, today_str, date_range)
 
 
-def _write_report(announcements: list, date_str: str):
+def _write_report(announcements: list, date_str: str, date_range: str = ""):
     os.makedirs(config.REPORT_DIR, exist_ok=True)
     path = os.path.join(config.REPORT_DIR, f"report_{date_str}.md")
 
-    total = len(config.STOCK_CODES) + len(config.HK_STOCK_CODES) + len(config.US_STOCK_CODES)
     lines = [
-        f"# 自选股公告摘要 — {date_str}\n",
+        f"# 自选股公告摘要 — {date_range or date_str}\n",
         f"> A股 {len(config.STOCK_CODES)} 只 | 港股 {len(config.HK_STOCK_CODES)} 只 | 美股 {len(config.US_STOCK_CODES)} 只，本期 **{len(announcements)}** 条相关公告\n",
         "---\n",
     ]

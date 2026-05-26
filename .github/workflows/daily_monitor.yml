@@ -2,7 +2,7 @@ name: daily-stock-monitor
 
 on:
   schedule:
-    - cron: '0 23 * * *'
+    - cron: '0 23 1,6,11,16,21,26 * *'   # 每月 1/6/11/16/21/26 日 UTC 23:00（北京时间次日 07:00）
   workflow_dispatch:
 
 permissions:

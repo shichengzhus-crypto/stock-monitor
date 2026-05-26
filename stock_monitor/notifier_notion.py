@@ -79,7 +79,7 @@ def _divider() -> dict:
 
 # ── 主函数 ────────────────────────────────────────────────────
 
-def push_to_notion(announcements: list, date_str: str):
+def push_to_notion(announcements: list, date_str: str, date_range: str = ""):
     """把当日公告报告作为一个新页面写入 Notion 数据库"""
     if not config.NOTION_TOKEN:
         print("  [Notion] 未配置 NOTION_TOKEN，跳过推送")
@@ -95,8 +95,9 @@ def push_to_notion(announcements: list, date_str: str):
     a_cnt  = len(config.STOCK_CODES)
     hk_cnt = len(config.HK_STOCK_CODES)
     us_cnt = len(config.US_STOCK_CODES)
+    period = date_range or date_str
     blocks.append(_paragraph(
-        f"A股 {a_cnt} 只 | 港股 {hk_cnt} 只 | 美股 {us_cnt} 只，本期 {len(announcements)} 条相关公告",
+        f"📅 {period}　|　A股 {a_cnt} 只 | 港股 {hk_cnt} 只 | 美股 {us_cnt} 只，本期 {len(announcements)} 条相关公告",
         bold=True,
     ))
     blocks.append(_divider())
@@ -149,7 +150,7 @@ def push_to_notion(announcements: list, date_str: str):
 
     # ── 创建页面（Notion 单次最多 100 个块）────────────────────
     title_prop = _get_title_property_name()
-    page_title = f"自选股公告摘要 — {date_str}"
+    page_title = f"自选股公告摘要 — {date_range or date_str}"
 
     first_batch = blocks[:100]
     extra_batches = [blocks[i: i + 100] for i in range(100, len(blocks), 100)]
