@@ -36,7 +36,7 @@ def analyze(title: str, category: str, content: str = "") -> str:
                 {"role": "system", "content": _SYSTEM},
                 {"role": "user",   "content": user_msg},
             ],
-            max_tokens=150,
+            max_tokens=200,
             temperature=0.3,
         )
         return resp.choices[0].message.content.strip()

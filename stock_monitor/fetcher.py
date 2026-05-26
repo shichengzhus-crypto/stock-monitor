@@ -1,4 +1,5 @@
 """从东方财富（via akshare）抓取 A 股公告数据"""
+import re
 import time
 import requests
 from datetime import datetime, timedelta
@@ -68,10 +69,19 @@ class _TextExtractor(HTMLParser):
             self.parts.append(data.strip())
 
 
-def try_get_announcement_text(url: str, max_chars: int = 3000) -> str:
-    """尝试抓取公告页面的正文文字；失败时返回空字符串"""
+def try_get_announcement_text(url: str, max_chars: int = 6000) -> str:
+    """获取公告正文：优先调用东方财富内容 API，拿不到再降级 HTML 解析"""
     if not url:
         return ""
+
+    # 从 URL 提取 art_code：形如 .../detail/600887/AN202605211822643774.html
+    m = re.search(r'/(AN\d+)\.html', url)
+    if m:
+        text = _fetch_via_content_api(m.group(1), max_chars)
+        if text:
+            return text
+
+    # 降级：直接抓 HTML（对少数非标准页面兜底）
     try:
         resp = requests.get(url, headers=HEADERS, timeout=15)
         if resp.status_code == 200 and len(resp.text) > 500:
@@ -82,3 +92,27 @@ def try_get_announcement_text(url: str, max_chars: int = 3000) -> str:
     except Exception:
         pass
     return ""
+
+
+def _fetch_via_content_api(art_code: str, max_chars: int) -> str:
+    """调用东方财富 np-cnotice API 获取公告 notice_content 正文"""
+    try:
+        resp = requests.get(
+            "https://np-cnotice-stock.eastmoney.com/api/content/ann",
+            params={"art_code": art_code, "client_source": "web"},
+            headers=HEADERS,
+            timeout=15,
+        )
+        if resp.status_code != 200:
+            return ""
+        content = resp.json().get("data", {}).get("notice_content", "")
+        if not content:
+            return ""
+        # 如果含 HTML 标签，先提取纯文字
+        if "<" in content:
+            extractor = _TextExtractor()
+            extractor.feed(content)
+            content = "\n".join(extractor.parts)
+        return content[:max_chars]
+    except Exception:
+        return ""
