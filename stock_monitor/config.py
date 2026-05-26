@@ -6,6 +6,12 @@
 import os
 DEEPSEEK_API_KEY = os.environ.get("DEEPSEEK_API_KEY", "")
 
+# Notion 集成（用于将报告推送到 Notion 数据库）
+# NOTION_TOKEN      : 在 notion.so/my-integrations 创建集成后获取
+# NOTION_DATABASE_ID: 目标数据库页面 URL 中的32位 ID
+NOTION_TOKEN       = os.environ.get("NOTION_TOKEN", "")
+NOTION_DATABASE_ID = os.environ.get("NOTION_DATABASE_ID", "36c504eb555780ef8e34c79a06cb565c")
+
 # ── A 股 ──────────────────────────────────────────────
 # 深交所：000xxx / 002xxx / 300xxx
 # 上交所：600xxx / 601xxx / 603xxx / 688xxx
@@ -56,8 +62,8 @@ US_STOCK_CODES = [
     {"ticker": "PDD", "cik": "0001737806", "name": "拼多多"},
 ]
 
-# 查询最近几天的公告（程序会在周一自动扩展为3天以覆盖周末）
-DAYS_BACK = 1
+# 查询最近几天的公告
+DAYS_BACK = 5
 
 # 报告保存目录（相对于本文件所在目录）
 REPORT_DIR = "reports"

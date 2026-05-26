@@ -8,10 +8,11 @@ from collections import defaultdict
 from datetime import datetime
 
 import config
-from fetcher    import fetch_announcements, try_get_announcement_text
-from fetcher_hk import fetch_hk_announcements
-from fetcher_us import fetch_us_announcements
-from analyzer import analyze
+from fetcher          import fetch_announcements, try_get_announcement_text
+from fetcher_hk       import fetch_hk_announcements
+from fetcher_us       import fetch_us_announcements
+from analyzer         import analyze
+from notifier_notion  import push_to_notion
 
 
 def run():
@@ -88,6 +89,10 @@ def run():
         time.sleep(0.5)
 
     _write_report(all_announcements, today_str)
+
+    # 推送到 Notion
+    print("\n正在推送到 Notion...")
+    push_to_notion(all_announcements, today_str)
 
 
 def _write_report(announcements: list, date_str: str):

@@ -28,6 +28,7 @@ jobs:
       - name: Run monitor
         env:
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
         run: |
           cd stock_monitor
           python main.py
