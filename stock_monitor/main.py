@@ -8,15 +8,18 @@ from collections import defaultdict
 from datetime import datetime
 
 import config
-from fetcher import fetch_announcements, try_get_announcement_text
+from fetcher    import fetch_announcements, try_get_announcement_text
+from fetcher_hk import fetch_hk_announcements
+from fetcher_us import fetch_us_announcements
 from analyzer import analyze
 
 
 def run():
     today_str = datetime.now().strftime("%Y-%m-%d")
+    total = len(config.STOCK_CODES) + len(config.HK_STOCK_CODES) + len(config.US_STOCK_CODES)
     print(f"\n{'='*54}")
-    print(f"  A股自选股公告监控  {today_str}")
-    print(f"  监控股票数：{len(config.STOCK_CODES)}")
+    print(f"  自选股公告监控  {today_str}")
+    print(f"  A股 {len(config.STOCK_CODES)} 只 | 港股 {len(config.HK_STOCK_CODES)} 只 | 美股 {len(config.US_STOCK_CODES)} 只")
     print(f"{'='*54}\n")
 
     if not config.DEEPSEEK_API_KEY:
@@ -47,6 +50,43 @@ def run():
         print()
         time.sleep(0.5)
 
+    # ── 港股 ──────────────────────────────────────────
+    print("\n[ 港股 ]")
+    for code in config.HK_STOCK_CODES:
+        print(f"▶ {code.zfill(5)}", end="  ", flush=True)
+        announcements = fetch_hk_announcements(code, config.DAYS_BACK)
+        if not announcements:
+            print("近期无相关公告")
+            continue
+        name = announcements[0]["stock_name"]
+        print(f"{name}  →  找到 {len(announcements)} 条，分析中...")
+        for ann in announcements:
+            content = try_get_announcement_text(ann["url"])
+            ann["summary"] = analyze(ann["title"], ann["category"], content)
+            all_announcements.append(ann)
+            time.sleep(0.3)
+        print()
+        time.sleep(0.5)
+
+    # ── 美股 ──────────────────────────────────────────
+    print("\n[ 美股 ]")
+    for stock in config.US_STOCK_CODES:
+        print(f"▶ {stock['ticker']}", end="  ", flush=True)
+        announcements = fetch_us_announcements(
+            stock["cik"], stock["ticker"], stock["name"], config.DAYS_BACK
+        )
+        if not announcements:
+            print("近期无相关公告")
+            continue
+        print(f"{stock['name']}  →  找到 {len(announcements)} 条，分析中...")
+        for ann in announcements:
+            content = try_get_announcement_text(ann["url"])
+            ann["summary"] = analyze(ann["title"], ann["category"], content)
+            all_announcements.append(ann)
+            time.sleep(0.3)
+        print()
+        time.sleep(0.5)
+
     _write_report(all_announcements, today_str)
 
 
@@ -54,9 +94,10 @@ def _write_report(announcements: list, date_str: str):
     os.makedirs(config.REPORT_DIR, exist_ok=True)
     path = os.path.join(config.REPORT_DIR, f"report_{date_str}.md")
 
+    total = len(config.STOCK_CODES) + len(config.HK_STOCK_CODES) + len(config.US_STOCK_CODES)
     lines = [
-        f"# A股自选股公告摘要 — {date_str}\n",
-        f"> 监控 {len(config.STOCK_CODES)} 只股票，本期 **{len(announcements)}** 条相关公告\n",
+        f"# 自选股公告摘要 — {date_str}\n",
+        f"> A股 {len(config.STOCK_CODES)} 只 | 港股 {len(config.HK_STOCK_CODES)} 只 | 美股 {len(config.US_STOCK_CODES)} 只，本期 **{len(announcements)}** 条相关公告\n",
         "---\n",
     ]
 
