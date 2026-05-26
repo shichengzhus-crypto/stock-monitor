@@ -48,6 +48,7 @@ def fetch_announcements(code: str, days_back: int = 1) -> list:
     return results
 
 
+
 class _TextExtractor(HTMLParser):
     def __init__(self):
         super().__init__()

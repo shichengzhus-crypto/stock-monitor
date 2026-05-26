@@ -17,7 +17,6 @@ from notifier_notion  import push_to_notion
 
 def run():
     today_str = datetime.now().strftime("%Y-%m-%d")
-    total = len(config.STOCK_CODES) + len(config.HK_STOCK_CODES) + len(config.US_STOCK_CODES)
     print(f"\n{'='*54}")
     print(f"  自选股公告监控  {today_str}")
     print(f"  A股 {len(config.STOCK_CODES)} 只 | 港股 {len(config.HK_STOCK_CODES)} 只 | 美股 {len(config.US_STOCK_CODES)} 只")

@@ -112,14 +112,40 @@ def push_to_notion(announcements: list, date_str: str):
         for stock_label, anns in grouped.items():
             blocks.append(_heading2(stock_label))
             for ann in anns:
-                blocks.append(_heading3(f"[{ann['category']}]  {ann['title']}"))
-                blocks.append(_paragraph(f"📅 {ann['time']}"))
+                # 标题行：[类别] 标题（日期）加粗显示
+                title_line = f"[{ann['category']}]  {ann['title']}（{ann['time']}）"
                 summary = ann.get("summary", "").strip()
-                if summary:
-                    blocks.append(_paragraph(summary))
-                if ann.get("url"):
-                    blocks.append(_link_paragraph("查看原文 →", ann["url"]))
-                blocks.append(_divider())
+                url = ann.get("url", "")
+
+                # 摘要 + 链接合并到一个段落
+                rich_text = [
+                    {"type": "text", "text": {"content": title_line[:2000]},
+                     "annotations": {"bold": True}},
+                ]
+                blocks.append({
+                    "type": "paragraph",
+                    "paragraph": {"rich_text": rich_text},
+                })
+
+                if summary or url:
+                    body_parts = []
+                    if summary:
+                        body_parts.append({
+                            "type": "text",
+                            "text": {"content": summary[:1800]},
+                        })
+                    if url:
+                        body_parts.append({
+                            "type": "text",
+                            "text": {"content": "  查看原文→", "link": {"url": url}},
+                        })
+                    blocks.append({
+                        "type": "paragraph",
+                        "paragraph": {"rich_text": body_parts},
+                    })
+
+            # 公司之间才加分隔线
+            blocks.append(_divider())
 
     # ── 创建页面（Notion 单次最多 100 个块）────────────────────
     title_prop = _get_title_property_name()
