@@ -13,21 +13,6 @@ RELEVANT_FORMS = {
     "6-K/A": "重要公告修订",
 }
 
-# 6-K 中通过标题过滤出真正重要的内容（排除例行披露）
-SIX_K_KEYWORDS = [
-    "earnings", "results", "revenue", "profit", "loss",
-    "dividend", "acquisition", "merger", "restructur",
-    "guidance", "outlook", "warning", "preliminary",
-    "business update", "investor",
-    # 中文关键词（部分公司用中文提交）
-    "业绩", "收入", "利润", "股息", "收购", "重组", "盈利",
-]
-
-
-def _is_relevant_6k(title: str) -> bool:
-    t = title.lower()
-    return any(kw.lower() in t for kw in SIX_K_KEYWORDS)
-
 
 def fetch_us_announcements(cik: str, ticker: str, name: str, days_back: int = 1) -> list:
     """
@@ -37,10 +22,6 @@ def fetch_us_announcements(cik: str, ticker: str, name: str, days_back: int = 1)
     name:   公司名称
     """
     today = datetime.now()
-    if today.weekday() == 0:
-        days_back = max(days_back, 3)
-    elif today.weekday() in (5, 6):
-        days_back = max(days_back, 3)
 
     cutoff = (today - timedelta(days=days_back)).strftime("%Y-%m-%d")
 
@@ -68,12 +49,7 @@ def fetch_us_announcements(cik: str, ticker: str, name: str, days_back: int = 1)
                 break          # 已按时间倒序，可提前退出
             if form not in RELEVANT_FORMS:
                 continue
-            if form in ("6-K", "6-K/A"):
-                title = desc or doc
-                if not _is_relevant_6k(title):
-                    continue
-            else:
-                title = desc or form
+            title = desc or doc or form
 
             # 构建 SEC 原文链接
             accno_clean = accno.replace("-", "")

@@ -8,10 +8,10 @@ _client = OpenAI(
 )
 
 _SYSTEM = (
-    "你是一个专业的A股投资分析助手。"
-    "请分析公司公告，提炼对投资者最重要的信息。"
-    "关注：公司实际经营变化、股东回报影响、潜在风险或机会。"
-    "回答简洁，使用中文，3-5句话，不废话。"
+    "你是上市公司公告速读助手。"
+    "用1～2句话直接说明公告的核心事实，包含关键数字（如有）。"
+    "不要分析影响，不要套话，不要'需关注'之类的废话，只陈述发生了什么。"
+    "用中文回答。"
 )
 
 
@@ -21,14 +21,12 @@ def analyze(title: str, category: str, content: str = "") -> str:
         user_msg = (
             f"公告类别：{category}\n"
             f"公告标题：{title}\n\n"
-            f"公告正文（节选）：\n{content}\n\n"
-            "请提炼关键信息：①核心内容 ②对经营/投资者的影响 ③需特别关注的点。"
+            f"公告正文（节选）：\n{content}"
         )
     else:
         user_msg = (
             f"公告类别：{category}\n"
-            f"公告标题：{title}\n\n"
-            "（仅有标题，无正文）请根据标题推断公告内容，说明投资者应关注什么。"
+            f"公告标题：{title}"
         )
 
     try:
@@ -38,7 +36,7 @@ def analyze(title: str, category: str, content: str = "") -> str:
                 {"role": "system", "content": _SYSTEM},
                 {"role": "user",   "content": user_msg},
             ],
-            max_tokens=300,
+            max_tokens=150,
             temperature=0.3,
         )
         return resp.choices[0].message.content.strip()

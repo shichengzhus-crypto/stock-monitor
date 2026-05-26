@@ -12,32 +12,10 @@ HEADERS = {
     "Referer": "https://data.eastmoney.com/",
 }
 
-# 关注的公告类型关键词（只要类型名称含有以下任意词，就保留）
-RELEVANT_KEYWORDS = [
-    "年度报告", "半年度报告", "半年报",
-    "一季度", "三季度", "季报",
-    "业绩预告", "业绩快报",
-    "分配", "分红", "送转",
-    "重组", "重大资产", "重大合同", "并购",
-    "增发", "配股", "可转债",
-    "股权激励",
-]
-
-
-def _is_relevant(ann_type: str) -> bool:
-    return any(kw in ann_type for kw in RELEVANT_KEYWORDS)
-
 
 def fetch_announcements(code: str, days_back: int = 1) -> list:
     """获取指定股票最近 N 天内的相关公告"""
     today = datetime.now()
-    # 周末/周一自动回溯到上周五，确保覆盖完整交易日
-    if today.weekday() == 0:    # 周一
-        days_back = max(days_back, 3)
-    elif today.weekday() == 6:  # 周日
-        days_back = max(days_back, 3)
-    elif today.weekday() == 5:  # 周六
-        days_back = max(days_back, 2)
 
     end_date   = today.strftime("%Y%m%d")
     start_date = (today - timedelta(days=days_back)).strftime("%Y%m%d")
@@ -59,8 +37,6 @@ def fetch_announcements(code: str, days_back: int = 1) -> list:
     results = []
     for _, row in df.iterrows():
         ann_type = str(row.get("公告类型", ""))
-        if not _is_relevant(ann_type):
-            continue
         results.append({
             "stock_code": str(row.get("代码", code)),
             "stock_name": str(row.get("名称", "")),

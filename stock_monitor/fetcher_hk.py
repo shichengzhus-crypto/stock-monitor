@@ -8,25 +8,6 @@ HEADERS = {
     "Referer": "https://data.eastmoney.com/",
 }
 
-# 关注的公告类型关键词
-RELEVANT_KEYWORDS = [
-    # 业绩
-    "年度业绩", "全年业绩", "末期业绩", "中期业绩", "季度业绩",
-    "年报", "中期报告", "业绩公告", "盈利警告", "盈利喜讯",
-    # 分红
-    "股息", "派息", "分红", "末期息", "特别息", "中期息",
-    # 重组并购
-    "重组", "合并", "收购", "出售", "分拆", "私有化",
-    # 融资
-    "供股", "配售", "发行新股", "可换股",
-    # 其他重要
-    "内幕消息", "须予公告", "关连交易", "主要交易",
-]
-
-
-def _is_relevant(title: str) -> bool:
-    return any(kw in title for kw in RELEVANT_KEYWORDS)
-
 
 def _pad_code(code: str) -> str:
     """港股代码统一补全为5位，如 551 → 00551"""
@@ -36,12 +17,6 @@ def _pad_code(code: str) -> str:
 def fetch_hk_announcements(code: str, days_back: int = 1) -> list:
     """获取指定港股最近 N 天内的相关公告"""
     today = datetime.now()
-    if today.weekday() == 0:
-        days_back = max(days_back, 3)
-    elif today.weekday() == 6:
-        days_back = max(days_back, 3)
-    elif today.weekday() == 5:
-        days_back = max(days_back, 2)
 
     padded = _pad_code(code)
     start_date = (today - timedelta(days=days_back)).strftime("%Y%m%d")
@@ -76,8 +51,6 @@ def fetch_hk_announcements(code: str, days_back: int = 1) -> list:
                     continue
 
                 title = item.get("title", "").strip()
-                if not _is_relevant(title):
-                    continue
 
                 # 获取股票名称
                 stock_name = ""
