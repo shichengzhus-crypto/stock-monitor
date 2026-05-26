@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(pip install requests openai -q)",
+      "PowerShell(schtasks /create /tn \"A股公告监控\" /tr \"D:\\\\AI_claude_code\\\\stock_monitor\\\\run.bat\" /sc daily /st 07:00 /f)"
+    ]
+  }
+}
