@@ -5,6 +5,11 @@ on:
     # 北京时间周一至周五 15:30（A股收盘后），UTC 07:30
     - cron: '30 7 * * 1-5'
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'stock_monitor/trailing/**'
+      - '.github/workflows/trailing_stop.yml'
 
 permissions:
   contents: write
@@ -32,7 +37,13 @@ jobs:
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
         run: |
           cd stock_monitor/trailing
-          python monitor.py
+          mkdir -p reports
+          # Tee all output to a log file so we can debug from the commit
+          python -u monitor.py 2>&1 | tee reports/last_run.log
+          # propagate python exit code (tee swallows it)
+          exit ${PIPESTATUS[0]}
+          # Also dump whether the secret was non-empty (length only, never the value)
+        # Note: secret length is logged inside monitor.py via os.environ check
 
       - name: Commit state and report
         run: |

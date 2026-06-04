@@ -152,10 +152,11 @@ def fetch_price(item: dict) -> float | None:
 # ── 邮件 ──────────────────────────────────────────────────
 
 def send_email(subject: str, body: str) -> bool:
-    addr = os.environ.get("GMAIL_ADDRESS", DEFAULT_EMAIL)
+    addr = os.environ.get("GMAIL_ADDRESS") or DEFAULT_EMAIL
     pwd = os.environ.get("GMAIL_APP_PASSWORD", "")
+    print(f"  [邮件] 尝试发送 → 收件人: {addr}, 主题: {subject}")
     if not pwd:
-        print(f"  [邮件] 未配置 GMAIL_APP_PASSWORD，跳过发送：{subject}")
+        print(f"  [邮件] 未配置 GMAIL_APP_PASSWORD，跳过发送")
         return False
     msg = EmailMessage()
     msg["Subject"] = subject
@@ -164,13 +165,18 @@ def send_email(subject: str, body: str) -> bool:
     msg.set_content(body)
     try:
         with smtplib.SMTP("smtp.gmail.com", 587, timeout=30) as s:
+            s.set_debuglevel(1)  # 打印 SMTP 对话细节用于排查
             s.starttls()
             s.login(addr, pwd)
             s.send_message(msg)
         print(f"  [邮件] 已发送：{subject}")
         return True
+    except smtplib.SMTPAuthenticationError as e:
+        print(f"  [邮件] 认证失败 ({subject}): {e}")
+        print(f"  [邮件] 这通常意味着应用密码错误，或 Gmail 账号未开启两步验证")
+        return False
     except Exception as e:
-        print(f"  [邮件] 发送失败 ({subject}): {e}")
+        print(f"  [邮件] 发送失败 ({subject}): {type(e).__name__}: {e}")
         return False
 
 
@@ -314,6 +320,15 @@ def write_report(snapshot: list, today: str, alerts: list):
 def main():
     today = datetime.now(ZoneInfo("Asia/Shanghai")).strftime("%Y-%m-%d")
     print(f"=== 追踪止盈监控 {today} ===\n")
+
+    # 启动诊断：检查邮件凭证是否生效（只打印长度，不泄露值）
+    pwd_env = os.environ.get("GMAIL_APP_PASSWORD", "")
+    addr_env = os.environ.get("GMAIL_ADDRESS", DEFAULT_EMAIL)
+    print(f"[诊断] GMAIL_ADDRESS = {addr_env}")
+    print(f"[诊断] GMAIL_APP_PASSWORD 长度 = {len(pwd_env)} (期望 16)")
+    if pwd_env:
+        print(f"[诊断] 密码首位 = '{pwd_env[0]}' 末位 = '{pwd_env[-1]}'（用于核对是否截断）")
+    print()
 
     watchlist = load_yaml(WATCHLIST_FILE, [])
     state = load_yaml(STATE_FILE, {})
