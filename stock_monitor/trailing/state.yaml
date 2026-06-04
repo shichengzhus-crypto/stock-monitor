@@ -1,1 +1,18 @@
-{}
+'110081':
+  peak: null
+  stop: null
+  activated: false
+  last_sell_alert_date: null
+  last_bond_alert: null
+000921:
+  peak: 26.55
+  stop: 23.89
+  activated: true
+  last_sell_alert_date: null
+  last_bond_alert: null
+'600690':
+  peak: null
+  stop: null
+  activated: false
+  last_sell_alert_date: null
+  last_bond_alert: null
