@@ -1,0 +1,60 @@
+=== 追踪止盈监控 2026-06-04 ===
+
+[诊断] GMAIL_ADDRESS = 
+[诊断] GMAIL_APP_PASSWORD 长度 = 16 (期望 16)
+[诊断] 密码首位 = 'c' 末位 = 'l'（用于核对是否截断）
+
+  0%|          | 0/5 [00:00<?, ?it/s] 20%|██        | 1/5 [00:00<00:02,  1.81it/s] 40%|████      | 2/5 [00:01<00:01,  1.82it/s] 60%|██████    | 3/5 [00:01<00:01,  1.84it/s] 80%|████████  | 4/5 [00:02<00:00,  1.86it/s]100%|██████████| 5/5 [00:02<00:00,  1.91it/s]                                             [110081] 闻泰转债: 当前=90.851 峰值=None 止盈=None 状态=待机
+  [fetch] 东方财富不可用 (('Connection aborted.', RemoteDisconnected('Remote end closed connection without response')))，回退新浪…
+Please wait for a moment:   0%|          | 0/70 [00:00<?, ?it/s]Please wait for a moment:   1%|▏         | 1/70 [00:00<00:36,  1.89it/s]Please wait for a moment:   3%|▎         | 2/70 [00:01<00:43,  1.55it/s]Please wait for a moment:   4%|▍         | 3/70 [00:01<00:39,  1.70it/s]Please wait for a moment:   6%|▌         | 4/70 [00:02<00:36,  1.79it/s]Please wait for a moment:   7%|▋         | 5/70 [00:03<00:41,  1.58it/s]Please wait for a moment:   9%|▊         | 6/70 [00:03<00:38,  1.68it/s]Please wait for a moment:  10%|█         | 7/70 [00:04<00:36,  1.74it/s]Please wait for a moment:  11%|█▏        | 8/70 [00:04<00:34,  1.79it/s]Please wait for a moment:  13%|█▎        | 9/70 [00:05<00:33,  1.82it/s]Please wait for a moment:  14%|█▍        | 10/70 [00:06<00:39,  1.53it/s]Please wait for a moment:  16%|█▌        | 11/70 [00:06<00:36,  1.63it/s]Please wait for a moment:  17%|█▋        | 12/70 [00:07<00:33,  1.72it/s]Please wait for a moment:  19%|█▊        | 13/70 [00:07<00:32,  1.77it/s]Please wait for a moment:  20%|██        | 14/70 [00:08<00:30,  1.81it/s]Please wait for a moment:  21%|██▏       | 15/70 [00:08<00:29,  1.84it/s]Please wait for a moment:  23%|██▎       | 16/70 [00:09<00:29,  1.86it/s]Please wait for a moment:  24%|██▍       | 17/70 [00:09<00:28,  1.87it/s]Please wait for a moment:  26%|██▌       | 18/70 [00:10<00:27,  1.88it/s]Please wait for a moment:  27%|██▋       | 19/70 [00:10<00:27,  1.89it/s]Please wait for a moment:  29%|██▊       | 20/70 [00:11<00:26,  1.89it/s]Please wait for a moment:  30%|███       | 21/70 [00:12<00:30,  1.60it/s]Please wait for a moment:  31%|███▏      | 22/70 [00:12<00:28,  1.68it/s]Please wait for a moment:  33%|███▎      | 23/70 [00:13<00:26,  1.75it/s]Please wait for a moment:  34%|███▍      | 24/70 [00:13<00:25,  1.79it/s]Please wait for a moment:  36%|███▌      | 25/70 [00:14<00:24,  1.84it/s]Please wait for a moment:  37%|███▋      | 26/70 [00:14<00:23,  1.85it/s]Please wait for a moment:  39%|███▊      | 27/70 [00:15<00:28,  1.51it/s]Please wait for a moment:  40%|████      | 28/70 [00:16<00:26,  1.61it/s]Please wait for a moment:  41%|████▏     | 29/70 [00:16<00:24,  1.69it/s]Please wait for a moment:  43%|████▎     | 30/70 [00:17<00:22,  1.74it/s]Please wait for a moment:  44%|████▍     | 31/70 [00:17<00:21,  1.79it/s]Please wait for a moment:  46%|████▌     | 32/70 [00:18<00:20,  1.82it/s]Please wait for a moment:  47%|████▋     | 33/70 [00:18<00:20,  1.84it/s]Please wait for a moment:  49%|████▊     | 34/70 [00:19<00:19,  1.87it/s]Please wait for a moment:  50%|█████     | 35/70 [00:19<00:18,  1.88it/s]Please wait for a moment:  51%|█████▏    | 36/70 [00:20<00:17,  1.90it/s]Please wait for a moment:  53%|█████▎    | 37/70 [00:20<00:17,  1.90it/s]Please wait for a moment:  54%|█████▍    | 38/70 [00:21<00:16,  1.92it/s]Please wait for a moment:  56%|█████▌    | 39/70 [00:21<00:16,  1.92it/s]Please wait for a moment:  57%|█████▋    | 40/70 [00:22<00:15,  1.93it/s]Please wait for a moment:  59%|█████▊    | 41/70 [00:22<00:14,  1.94it/s]Please wait for a moment:  60%|██████    | 42/70 [00:23<00:14,  1.93it/s]Please wait for a moment:  61%|██████▏   | 43/70 [00:24<00:14,  1.93it/s]Please wait for a moment:  63%|██████▎   | 44/70 [00:24<00:13,  1.92it/s]Please wait for a moment:  64%|██████▍   | 45/70 [00:25<00:13,  1.91it/s]Please wait for a moment:  66%|██████▌   | 46/70 [00:25<00:12,  1.91it/s]Please wait for a moment:  67%|██████▋   | 47/70 [00:26<00:12,  1.92it/s]Please wait for a moment:  69%|██████▊   | 48/70 [00:26<00:11,  1.91it/s]Please wait for a moment:  70%|███████   | 49/70 [00:27<00:10,  1.92it/s]Please wait for a moment:  71%|███████▏  | 50/70 [00:27<00:10,  1.92it/s]Please wait for a moment:  73%|███████▎  | 51/70 [00:28<00:09,  1.93it/s]Please wait for a moment:  74%|███████▍  | 52/70 [00:28<00:09,  1.92it/s]Please wait for a moment:  76%|███████▌  | 53/70 [00:29<00:08,  1.93it/s]Please wait for a moment:  77%|███████▋  | 54/70 [00:29<00:08,  1.94it/s]Please wait for a moment:  79%|███████▊  | 55/70 [00:30<00:07,  1.93it/s]Please wait for a moment:  80%|████████  | 56/70 [00:31<00:09,  1.50it/s]Please wait for a moment:  81%|████████▏ | 57/70 [00:31<00:08,  1.60it/s]Please wait for a moment:  83%|████████▎ | 58/70 [00:32<00:07,  1.68it/s]Please wait for a moment:  84%|████████▍ | 59/70 [00:32<00:06,  1.74it/s]Please wait for a moment:  86%|████████▌ | 60/70 [00:33<00:05,  1.78it/s]Please wait for a moment:  87%|████████▋ | 61/70 [00:33<00:04,  1.83it/s]Please wait for a moment:  89%|████████▊ | 62/70 [00:34<00:04,  1.86it/s]Please wait for a moment:  90%|█████████ | 63/70 [00:34<00:03,  1.88it/s]Please wait for a moment:  91%|█████████▏| 64/70 [00:35<00:03,  1.89it/s]Please wait for a moment:  93%|█████████▎| 65/70 [00:35<00:02,  1.89it/s]Please wait for a moment:  94%|█████████▍| 66/70 [00:36<00:02,  1.91it/s]Please wait for a moment:  96%|█████████▌| 67/70 [00:37<00:01,  1.92it/s]Please wait for a moment:  97%|█████████▋| 68/70 [00:37<00:01,  1.92it/s]Please wait for a moment:  99%|█████████▊| 69/70 [00:38<00:00,  1.52it/s]Please wait for a moment: 100%|██████████| 70/70 [00:38<00:00,  1.69it/s]                                                                         [000921] 海信家电: 当前=26.55 峰值=26.55 止盈=23.89 状态=[*] 刚启用追踪
+[600690] 海尔智家: 当前=20.36 峰值=None 止盈=None 状态=待机
+
+报告已写入: /home/runner/work/stock-monitor/stock-monitor/stock_monitor/trailing/reports/latest.md
+
+=== 警报数: 1 ===
+  [邮件] 尝试发送 → 收件人: shichengzhus@gmail.com, 主题: [启用追踪] 海信家电 @26.55
+send: 'ehlo runnervm3jyl0.xplmaoejahduziehhbpepjkxga.gx.internal.cloudapp.net\r\n'
+reply: b'250-smtp.gmail.com at your service, [52.173.181.21]\r\n'
+reply: b'250-SIZE 35882577\r\n'
+reply: b'250-8BITMIME\r\n'
+reply: b'250-STARTTLS\r\n'
+reply: b'250-ENHANCEDSTATUSCODES\r\n'
+reply: b'250-PIPELINING\r\n'
+reply: b'250-CHUNKING\r\n'
+reply: b'250 SMTPUTF8\r\n'
+reply: retcode (250); Msg: b'smtp.gmail.com at your service, [52.173.181.21]\nSIZE 35882577\n8BITMIME\nSTARTTLS\nENHANCEDSTATUSCODES\nPIPELINING\nCHUNKING\nSMTPUTF8'
+send: 'STARTTLS\r\n'
+reply: b'220 2.0.0 Ready to start TLS\r\n'
+reply: retcode (220); Msg: b'2.0.0 Ready to start TLS'
+send: 'ehlo runnervm3jyl0.xplmaoejahduziehhbpepjkxga.gx.internal.cloudapp.net\r\n'
+reply: b'250-smtp.gmail.com at your service, [52.173.181.21]\r\n'
+reply: b'250-SIZE 35882577\r\n'
+reply: b'250-8BITMIME\r\n'
+reply: b'250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH\r\n'
+reply: b'250-ENHANCEDSTATUSCODES\r\n'
+reply: b'250-PIPELINING\r\n'
+reply: b'250-CHUNKING\r\n'
+reply: b'250 SMTPUTF8\r\n'
+reply: retcode (250); Msg: b'smtp.gmail.com at your service, [52.173.181.21]\nSIZE 35882577\n8BITMIME\nAUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH\nENHANCEDSTATUSCODES\nPIPELINING\nCHUNKING\nSMTPUTF8'
+send: 'AUTH PLAIN AHNoaWNoZW5nemh1c0BnbWFpbC5jb20AY3RkdHRza25uYWthaXN4bA==\r\n'
+reply: b'235 2.7.0 Accepted\r\n'
+reply: retcode (235); Msg: b'2.7.0 Accepted'
+send: 'mail FROM:<shichengzhus@gmail.com> size=346\r\n'
+reply: b'250 2.1.0 OK 5614622812f47-4865b5a39fbsm4219304b6e.1 - gsmtp\r\n'
+reply: retcode (250); Msg: b'2.1.0 OK 5614622812f47-4865b5a39fbsm4219304b6e.1 - gsmtp'
+send: 'rcpt TO:<shichengzhus@gmail.com>\r\n'
+reply: b'250 2.1.5 OK 5614622812f47-4865b5a39fbsm4219304b6e.1 - gsmtp\r\n'
+reply: retcode (250); Msg: b'2.1.5 OK 5614622812f47-4865b5a39fbsm4219304b6e.1 - gsmtp'
+send: 'data\r\n'
+reply: b'354 Go ahead 5614622812f47-4865b5a39fbsm4219304b6e.1 - gsmtp\r\n'
+reply: retcode (354); Msg: b'Go ahead 5614622812f47-4865b5a39fbsm4219304b6e.1 - gsmtp'
+data: (354, b'Go ahead 5614622812f47-4865b5a39fbsm4219304b6e.1 - gsmtp')
+send: b'Subject: =?utf-8?b?W+WQr+eUqOi/vei4ql0g5rW35L+h5a6255S1?= @26.55\r\nFrom: shichengzhus@gmail.com\r\nTo: shichengzhus@gmail.com\r\nContent-Type: text/plain; charset="utf-8"\r\nContent-Transfer-Encoding: 8bit\r\nMIME-Version: 1.0\r\n\r\n\xe6\xb5\xb7\xe4\xbf\xa1\xe5\xae\xb6\xe7\x94\xb5(000921) \xe4\xbb\xb7\xe6\xa0\xbc 26.55 \xe5\xb7\xb2\xe8\xbe\xbe\xe5\x90\xaf\xe7\x94\xa8\xe7\xba\xbf 26.0\xef\xbc\x8c\xe5\xbc\x80\xe5\xa7\x8b\xe8\xbf\xbd\xe8\xb8\xaa\xe6\xad\xa2\xe7\x9b\x88\xe3\x80\x82\r\n\xe5\x9b\x9e\xe6\x92\xa4\xe9\x98\x88\xe5\x80\xbc: 10.0%\r\n\xe5\x88\x9d\xe5\xa7\x8b\xe6\xad\xa2\xe7\x9b\x88\xe7\xba\xbf: 23.89\r\n.\r\n'
+reply: b'250 2.0.0 OK  1780577258 5614622812f47-4865b5a39fbsm4219304b6e.1 - gsmtp\r\n'
+reply: retcode (250); Msg: b'2.0.0 OK  1780577258 5614622812f47-4865b5a39fbsm4219304b6e.1 - gsmtp'
+data: (250, b'2.0.0 OK  1780577258 5614622812f47-4865b5a39fbsm4219304b6e.1 - gsmtp')
+send: 'QUIT\r\n'
+reply: b'221 2.0.0 closing connection 5614622812f47-4865b5a39fbsm4219304b6e.1 - gsmtp\r\n'
+reply: retcode (221); Msg: b'2.0.0 closing connection 5614622812f47-4865b5a39fbsm4219304b6e.1 - gsmtp'
+  [邮件] 已发送：[启用追踪] 海信家电 @26.55
+状态已保存到 /home/runner/work/stock-monitor/stock-monitor/stock_monitor/trailing/state.yaml
