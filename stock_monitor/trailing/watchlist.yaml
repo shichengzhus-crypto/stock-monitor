@@ -1,0 +1,33 @@
+# 追踪止盈自选股配置
+#
+# 字段说明：
+#   code         证券代码（A股6位 / 可转债6位）
+#   name         显示名称
+#   type         stock | bond
+#   cost         买入成本价（仅展示用，不参与计算）
+#   activate_at  价格涨到此值后才启用追踪止盈（未到达前只记录）
+#   trail_pct    从峰值回撤多少百分比触发卖出提醒
+#
+# 修改本文件后会在下一次 workflow 运行时生效。
+# 删除某只股票时，建议同时手动从 state.yaml 删除对应条目。
+
+- code: "110081"
+  name: 闻泰转债
+  type: bond
+  cost: 82
+  activate_at: 100      # 破面值 100 后开始追踪
+  trail_pct: 6          # 转债波动较小，6% 回撤触发
+
+- code: "000921"
+  name: 海信家电
+  type: stock
+  cost: 21
+  activate_at: 26       # 默认 cost * 1.25，按需调整
+  trail_pct: 10
+
+- code: "600690"
+  name: 海尔智家
+  type: stock
+  cost: 24
+  activate_at: 30       # 默认 cost * 1.25，按需调整
+  trail_pct: 10

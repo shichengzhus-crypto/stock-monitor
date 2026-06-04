@@ -1,3 +1,4 @@
 requests
 openai
 akshare
+pyyaml
