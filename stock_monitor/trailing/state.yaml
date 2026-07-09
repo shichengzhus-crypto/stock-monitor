@@ -1,6 +1,6 @@
 '110081':
-  peak: 100.74
-  stop: 94.7
+  peak: 105.871
+  stop: 99.52
   activated: true
   last_sell_alert_date: null
   last_bond_alert: null
@@ -8,7 +8,7 @@
   peak: 29.3
   stop: 26.37
   activated: true
-  last_sell_alert_date: '2026-07-08'
+  last_sell_alert_date: '2026-07-09'
   last_bond_alert: null
 '600690':
   peak: null
